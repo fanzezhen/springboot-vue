@@ -34,53 +34,53 @@
 </template>
 
 <script>
-import axios from 'axios'
-import qs from 'qs'
+  import axios from 'axios'
+  import qs from 'qs'
 
-export default {
-  data () {
-    return {
-      form: {
-        username: '',
-        password: '',
-        checked: []
-      },
-      show: true
-    }
-  },
-  methods: {
-    onSubmit (evt) {
-      evt.preventDefault();
-      
-      // 关键就在于要对参数进行处理
-      axios.post('http://localhost:8088/api/login',qs.stringify({
-        'username': this.form.username,
-        'password': this.form.password
-      })).then((response) => {
-        console.log(response);
-        console.log(response.data);
-        console.log(response.data.code);
-        let status = response.data.code;
-        if(status === '0000') {
-          this.$router.push('/hello-world');
-        } else {
-          alert(response.data.message);
-        }
-        console.log(response);
-      }).catch((error) => {
-        console.log(response);
-      });
+  export default {
+    data() {
+      return {
+        form: {
+          username: '',
+          password: '',
+          checked: []
+        },
+        show: true
+      }
     },
-    onReset (evt) {
-      evt.preventDefault();
-      /* Reset our form values */
-      this.form.username = '';
-      this.form.password = '';
-      this.form.checked = [];
-      /* Trick to reset/clear native browser form validation state */
-      this.show = false;
-      this.$nextTick(() => { this.show = true });
+    methods: {
+      onSubmit(evt) {
+        evt.preventDefault();
+
+        // 关键就在于要对参数进行处理
+        axios.post('http://localhost:8088/api/login', qs.stringify({
+          'username': this.form.username,
+          'password': this.form.password
+        })).then((response) => {
+          console.log(response);
+          let status = response.data.code;
+          if (status === '0000') {
+            this.$router.push('/hello-world');
+          } else {
+            alert(response.data.message);
+          }
+        }).catch((error) => {
+          console.log(error);
+          console.log(response);
+        });
+      },
+      onReset(evt) {
+        evt.preventDefault();
+        /* Reset our form values */
+        this.form.username = '';
+        this.form.password = '';
+        this.form.checked = [];
+        /* Trick to reset/clear native browser form validation state */
+        this.show = false;
+        this.$nextTick(() => {
+          this.show = true
+        });
+      }
     }
   }
-}
 </script>

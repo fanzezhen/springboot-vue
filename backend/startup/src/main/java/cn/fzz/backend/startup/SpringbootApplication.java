@@ -8,7 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan(basePackages = {"cn.fzz"})
-@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class}) // 配置数据源之后需删除exclude
 public class SpringbootApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(SpringbootApplication.class, args);
