@@ -65,8 +65,9 @@
             alert(response.data.message);
           }
         }).catch((error) => {
-          console.log(error);
-          console.log(response);
+          // console.log(error);
+          // console.log(response);
+          alert("请求失败！");
         });
       },
       onReset(evt) {
